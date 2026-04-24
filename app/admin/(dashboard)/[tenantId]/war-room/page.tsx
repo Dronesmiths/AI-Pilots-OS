@@ -547,6 +547,66 @@ export default function TenantWarRoomPage() {
                       </div>
                     </div>
                   )}
+
+                  {/* ── Assembly Pre-Flight Telemetry ── */}
+                  <div style={{
+                    marginTop: 10,
+                    paddingTop: 10,
+                    borderTop: '1px solid #F3F4F6',
+                    background: 'linear-gradient(135deg, #FFFDF0 0%, #FFF8E1 100%)',
+                    borderRadius: 8,
+                    padding: '8px 10px',
+                    border: '1px solid #F9AB00',
+                  }}>
+                    <div style={{
+                      fontSize: 8,
+                      fontWeight: 800,
+                      color: '#B45309',
+                      textTransform: 'uppercase',
+                      letterSpacing: 1.2,
+                      marginBottom: 7,
+                    }}>
+                      ⚡ Assembly Pre-Flight Telemetry
+                    </div>
+                    <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+                      {[
+                        { label: 'SCHM', title: 'Schema Markup' },
+                        { label: 'IMG',  title: 'Image Assets' },
+                        { label: 'FAQ',  title: 'FAQ Block' },
+                        { label: 'LNK',  title: 'Internal Links' },
+                        { label: 'BKL',  title: 'Backlink Anchors' },
+                        { label: 'HTML', title: 'HTML Template' },
+                      ].map((pill) => (
+                        <div
+                          key={pill.label}
+                          title={pill.title}
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            gap: 3,
+                          }}
+                        >
+                          {/* Active pill bar */}
+                          <div style={{
+                            width: 32,
+                            height: 8,
+                            borderRadius: 99,
+                            background: 'linear-gradient(90deg, #F87171, #FCA5A5)',
+                            boxShadow: '0 0 6px rgba(248,113,113,0.5)',
+                          }} />
+                          <span style={{
+                            fontSize: 7,
+                            fontWeight: 700,
+                            color: '#B45309',
+                            letterSpacing: 0.5,
+                          }}>
+                            {pill.label}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               );
             })}
