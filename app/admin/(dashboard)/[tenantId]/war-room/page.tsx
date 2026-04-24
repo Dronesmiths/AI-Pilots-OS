@@ -707,10 +707,11 @@ export default function TenantWarRoomPage() {
         
         const scheduledItems = new Map();
         
-        // Simple: every queued item has a scheduledTime from the DB — just plot it
+        // Simple: every queued item has a scheduledTime from the DB — just plot it in local time
         (pipelineData?.queued || []).forEach((c: any) => {
           if (!c.scheduledTime) return;
-          const dateStr = new Date(c.scheduledTime).toISOString().split('T')[0];
+          const d = new Date(c.scheduledTime);
+          const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
           if (!scheduledItems.has(dateStr)) scheduledItems.set(dateStr, []);
           const isQa = ['qa', 'llm', 'paa'].includes(c.category);
           scheduledItems.get(dateStr).push({ ...c, isQa });
@@ -746,7 +747,7 @@ export default function TenantWarRoomPage() {
                 {calendarDays.map((date, i) => {
                   const isToday = date.toDateString() === today.toDateString();
                   const isCurrentMonth = date.getMonth() === today.getMonth();
-                  const dateStr = date.toISOString().split('T')[0];
+                  const dateStr = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
                   const rawItems = scheduledItems.get(dateStr) || [];
                   // Show blogs/locations/cornerstone FIRST, then QA
                   const items = [...rawItems].sort((a, b) => (a.isQa ? 1 : 0) - (b.isQa ? 1 : 0));
